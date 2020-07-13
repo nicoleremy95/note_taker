@@ -2,7 +2,7 @@ const util = require("util")
 const fs = require("fs")
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
-const dbData = "/db.json"
+const dbData = "db/db.json"
 
 
 
@@ -10,6 +10,7 @@ class DB{
     async readNotes(){
         try {
             const notesRaw = await readFileAsync(dbData,"utf8")
+            console.log(notesRaw)
             return notesRaw ? JSON.parse(notesRaw) : []
         } catch (e) {
             console.log("Something went wrong while READING notes ", e)

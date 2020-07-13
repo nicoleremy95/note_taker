@@ -20,7 +20,7 @@ app.use(express.static( 'public'));
 const hmtlRoutes = require("./controllers/htmlroutes.js")
 app.use(hmtlRoutes)
 //api
-const apiRoutes = require("./controllers/htmlroutes.js");
+const apiRoutes = require("./controllers/api.js");
 app.use(apiRoutes)
 
 // Starts the server to begin listening

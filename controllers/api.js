@@ -3,15 +3,18 @@ const router = express.Router();
 const DB = require("../db/DB");
 const noteListItems = [];
 
-router.get("/api/notes", function(req, res) {
-    res.json(DB.readNotes());
+router.get("/api/notes", async(req, res) => {
+    res.json(await DB.readNotes());
 });
 
 router.post("/api/notes", async(req, res) =>{
     let activeNote = req.body
-    const savedNotes = await DB.readNotes();
-    await DB.writeNotes(activeNote, savedNotes);
-    res.json(noteListItems.push(activeNote))
+    const savedNotes =  await DB.readNotes();
+    console.log("saved notes", savedNotes)
+    console.log(activeNote)
+    await DB.writeNotes([activeNote, ...savedNotes]);
+    res.json(activeNote)
+    
     
     // noteListItems.push(activeNote)
     // res.json(noteListItems)
