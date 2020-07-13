@@ -14,37 +14,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static( 'public'));
 
-//variables
-const noteListItems = []
-
 // Routes
 // =============================================================
-//GET
-app.get("/", function(req, res) {
-res.sendFile(path.join(__dirname, "./public/index.html"));
-});
+//html
+const hmtlRoutes = require("./controllers/htmlroutes.js")
+app.use(hmtlRoutes)
+//api
+const apiRoutes = require("./controllers/htmlroutes.js");
+app.use(apiRoutes)
 
-app.get("/notes", function(req, res) {
-res.sendFile(path.join(__dirname, "./public/notes.html"));
-});
-
-app.get("/api/notes", function(req, res) {
-    return res.json(noteListItems)
-    });
-//POST
-app.post("/api/notes", function(req, res) {
-    let activeNote = req.body
-    noteListItems.push(activeNote)
-    res.json(noteListItems)
-    console.log(noteListItems)
-});
-
-//DELETE
-// app.delete("/api/notes/:id", function(req, res) {
-
-// }); 
-  
-  
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
