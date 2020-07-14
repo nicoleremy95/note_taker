@@ -24,11 +24,21 @@ class DB{
             console.log("Something went wrong while WRITING notes ", e)
         }
     }
-    // async deleteNotes(){
-    //     try{
-            
-    //     }
-    // }
+    async deleteNote(idNum){
+        try{
+            const notesArray = await readFileAsync(dbData, "utf8")
+            for ( var i=0; i<notesArray.length; i++){
+                if(notesArray[i].id===idNum){
+                    console.log( "found");
+                    
+                    notesArray.splice(i,1)
+                } else("not found")
+            } writeFileAsync (dbData, notesArray)
+
+        } catch (e){
+            console.log("something went wrong while deleting notes", e)
+        }
+    }
 
 }
 

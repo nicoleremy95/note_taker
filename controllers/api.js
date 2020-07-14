@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const DB = require("../db/DB");
-const noteListItems = [];
 
 router.get("/api/notes", async(req, res) => {
     res.json(await DB.readNotes());
@@ -9,31 +8,31 @@ router.get("/api/notes", async(req, res) => {
 
 router.post("/api/notes", async(req, res) =>{
     let activeNote = req.body
+    let currentId=1
+    //activeNote.id=1
     const savedNotes =  await DB.readNotes();
-    console.log("saved notes", savedNotes)
-    console.log(activeNote)
+    if(savedNotes.length > 0){
+      if(savedNotes[0].id){
+          currentId = savedNotes[0].id +1
+          activeNote.id= currentId
+      }else{
+          activeNote.id=currentId
+          
+      }
+    }else{
+        activeNote.id=currentId
+    }
     await DB.writeNotes([activeNote, ...savedNotes]);
     res.json(activeNote)
-    
-    
-    // noteListItems.push(activeNote)
-    // res.json(noteListItems)
-    // console.log(noteListItems)
-
-    // let noteListItemsStr = JSON.stringify(noteListItems)
-
-    // fs.writeFile(postAPIPath,noteListItemsStr,function(err){
-    //     if (err){
-    //         return console.log(err);
-    //     } console.log("note item posted to db.json")
-    // })
 });
 
-// router.delete("/api/notes/:id", async (req, res) =>{
-//     const uniqueID = parseInt(req.params.id);
-//     await DB.deleteNote(uniqueID);
-//     res.json(noteListItems)
+router.delete("/api/notes/:id", async (req, res) =>{
+    const uniqueID = parseInt(req.params.id);
+    console.log(uniqueID);
+    
+    await DB.deleteNote(uniqueID);
+    res.json(true)
 
-// }); 
+}); 
 
 module.exports = router;
