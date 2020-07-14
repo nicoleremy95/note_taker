@@ -4,7 +4,11 @@ note taker application homework using express
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ### Description
-This application dynamically can be used to write, save, and delete notes. This application will use an express backend and save and retrieve note data from a JSON file. 
+This application dynamically can be used to write, save, delete, and review saved notes. This application will use an express backend and save and retrieve note data from a JSON file. 
+
+There are three html routes set up in the htmlroutes.js file; the home page and the notes page. There are three requests set up in the api.js file including get api notes, post api notes, and delete api notes. Together, these routes allow for the user to write, save and delete notes from the backend which is then displayed on the front end using the index.js logic. All notes are written to a backend file called db.json.
+
+This app is also deployed on Heroku. 
 
     
 ## Table of Contents
@@ -71,7 +75,7 @@ Please make sure to update tests as appropriate.
 ### Questions
 1. [Github](https://github.com/nicoleremy95)
 
-### Link to Video of Application
+### Link Heroku
 1. [NOTE TAKER](https://drive.google.com/file/d/1XIR5b5sHZqeSox2YTBNKxbk67N34_sH-/view?usp=sharing)
     
     

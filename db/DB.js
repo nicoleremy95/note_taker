@@ -26,18 +26,21 @@ class DB{
     }
     async deleteNote(idNum){
         const notesArray = await readFileAsync(dbData, "utf8")
+        const newArray = JSON.parse(notesArray) 
         try{
-            // notesArray.filter(note => notesArray.id===idNum)
-            // console.log(note)
-            for (var i=0; i < notesArray.length; i++) {
-                if (notesArray[i].id === idNum) {
-                    notesArray.splice(i,0)
-                    console.log("this is the notes array", notesArray)
-                    writeFileAsync(dbData, notesArray)
+            for (var i=0; i < newArray.length; i++) {
+                console.log("notes array index id", newArray[i])
+                
+                let obj = newArray[i].id
+                console.log("idNum", idNum)
+                console.log("this is the current notes array", newArray)
+                if (obj === idNum) {
+                    newArray.splice(i,1);
+                    console.log("this is the notes array after delete", newArray)
+                    let newArrayStr = JSON.stringify(newArray)
+                    writeFileAsync(dbData, newArrayStr)
                 }
             }
-            // writeFileAsync(dbData, notesArray)
-
         } catch (e){
             console.log("something went wrong while DELETING notes", e)
         }

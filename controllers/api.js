@@ -30,8 +30,8 @@ router.delete("/api/notes/:id", async (req, res) =>{
     const uniqueID = parseInt(req.params.id);
     console.log(uniqueID);
     
-    await DB.deleteNote(uniqueID);
-    res.json(true)
+   
+    res.json( await DB.deleteNote(uniqueID));
 
 }); 
 
