@@ -25,18 +25,21 @@ class DB{
         }
     }
     async deleteNote(idNum){
+        const notesArray = await readFileAsync(dbData, "utf8")
         try{
-            const notesArray = await readFileAsync(dbData, "utf8")
-            for ( var i=0; i<notesArray.length; i++){
-                if(notesArray[i].id===idNum){
-                    console.log( "found");
-                    
-                    notesArray.splice(i,1)
-                } else("not found")
-            } writeFileAsync (dbData, notesArray)
+            // notesArray.filter(note => notesArray.id===idNum)
+            // console.log(note)
+            for (var i=0; i < notesArray.length; i++) {
+                if (notesArray[i].id === idNum) {
+                    notesArray.splice(i,0)
+                    console.log("this is the notes array", notesArray)
+                    writeFileAsync(dbData, notesArray)
+                }
+            }
+            // writeFileAsync(dbData, notesArray)
 
         } catch (e){
-            console.log("something went wrong while deleting notes", e)
+            console.log("something went wrong while DELETING notes", e)
         }
     }
 
