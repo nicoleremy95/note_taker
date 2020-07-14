@@ -9,7 +9,6 @@ router.get("/api/notes", async(req, res) => {
 router.post("/api/notes", async(req, res) =>{
     let activeNote = req.body
     let currentId=1
-    //activeNote.id=1
     const savedNotes =  await DB.readNotes();
     if(savedNotes.length > 0){
       if(savedNotes[0].id){
@@ -17,7 +16,6 @@ router.post("/api/notes", async(req, res) =>{
           activeNote.id= currentId
       }else{
           activeNote.id=currentId
-          
       }
     }else{
         activeNote.id=currentId
@@ -29,10 +27,7 @@ router.post("/api/notes", async(req, res) =>{
 router.delete("/api/notes/:id", async (req, res) =>{
     const uniqueID = parseInt(req.params.id);
     console.log(uniqueID);
-    
-   
     res.json( await DB.deleteNote(uniqueID));
-
 }); 
 
 module.exports = router;

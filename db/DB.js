@@ -4,8 +4,6 @@ const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 const dbData = "db/db.json"
 
-
-
 class DB{
     async readNotes(){
         try {
@@ -45,7 +43,6 @@ class DB{
             console.log("something went wrong while DELETING notes", e)
         }
     }
-
 }
 
 module.exports = new DB();
